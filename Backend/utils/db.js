@@ -7,7 +7,7 @@ const DB = process.env.DB;
 
 const dbConnection = async () => {
     try {
-        await mongoose.connect(DB).then(() => {
+        await mongoose.connect(DB).then( () => {
             console.log("Database connected successfully");
         })
     } 
