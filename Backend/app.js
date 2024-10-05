@@ -9,7 +9,7 @@ module.exports=app;
 //Cors 
 app.use(cors());
 
-// JSON
+// Json
 app.use(express.json());
 
 // ROUTES
