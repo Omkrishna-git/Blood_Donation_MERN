@@ -1,9 +1,10 @@
 const Donor = require("../models/Donor");
 
-//Create Doner
+// Create Donor
+
 const createDonor = async (req, res) => {
     try {
-        const newDonor = new Donor(req.body); 
+        const newDonor = Donor(req.body);
         const donor = await newDonor.save();
         res.status(201).json(donor);
     } 
@@ -12,37 +13,38 @@ const createDonor = async (req, res) => {
     }
 };
 
-// Get All Doners
+// Get All Donor
 
-const getAllDonors = async (req, res) => {
+const getAlldonors = async (req, res) => {
     try {
-        const donor = await Donor.find().sort({ createdAt: -1 }); 
-        res.status(200).json(donor);
-    } catch (error) {
+        const donors = await Donor.find().sort({ createdAt: -1 });
+        res.status(200).json(donors);
+    } 
+    catch (error) {
         res.status(500).json(error);
     }
 };
 
-// Update  Donors
+// Update Donor
 
-const updateDonor = async (req,res) =>{
-    try{
+const updateDonor = async (req, res) => {
+    try {
         const updateDonor = await Donor.findByIdAndUpdate(
             req.params.id,
-            {$set:req.body},
-            {new:true}
-        )
+            { $set: req.body },
+            { new: true }
+        );
 
-        res.status(200).json(updateDonor); 
-        
-    }
-    catch(error){
+        res.status(201).json(updateDonor);
+
+    } 
+    catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-// Get one donor
-const getOneDonor = async (req,res) =>{
+// Get one Donor
+const getOneDonor = async (req, res) => {
     try {
         const donor = await Donor.findById(req.params.id);
         res.status(200).json(donor);
@@ -50,39 +52,46 @@ const getOneDonor = async (req,res) =>{
     catch (error) {
         res.status(500).json(error);
     }
-}
+};
 
-// Delete donor
+// Delete Donor
 
-const deleteDonor = async (req,res) =>{
+const deleteDonor = async (req, res) => {
     try {
         await Donor.findByIdAndDelete(req.params.id);
-        res.status(200).json("Donor deleted successfully");
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-}
-
-// Stastistic
-
-const getDonorStats = async (req,res) =>{
-    try {
-        const stats = await Donor.aggregate([
-            {
-                $group:{
-                    _id : "$bloodgroup",
-                    count:{$sum:1}
-                }
-            }
-        ]);
-
-        res.status(200).json(stats);
-
-    } catch (error) {
+        res.status(201).json("Donor deleted successfully");
+    } 
+    catch (error) {
         res.status(500).json(error);
     }
 };
 
-module.exports = {deleteDonor,getAllDonors,getDonorStats,getOneDonor,updateDonor,createDonor}
+// Stastisic
+const getDonorsStats = async (req, res) => {
+    try {
+        const stats = await Donor.aggregate([
+            {
+                $group: {
+                _id: "$bloodgroup",
+                count: { $sum: 1 },
+                },
+            },
+        ]);
 
+        res.status(200).json(stats);
+
+    } 
+    catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+module.exports=
+{
+    deleteDonor,
+    getOneDonor,
+    getAlldonors,
+    getDonorsStats,
+    updateDonor,
+    createDonor
+}
