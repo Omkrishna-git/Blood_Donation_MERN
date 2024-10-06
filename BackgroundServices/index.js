@@ -3,6 +3,11 @@ const app = express();
 const dotenv = require("dotenv");
 const dbConnection = require("./utils/db");
 const cron = require('node-cron');
+// Added 4 types of mail from mailservices
+const { sendDetailsProsepctEmail} = require("./EmailServices/sendDetailsProspect");
+const { sendEligibilityEmail } = require("./EmailServices/sendEligibilityEmail");
+const { sendBloodDonationReminder } = require("./EmailServices/sendBloodDonationReminder");
+const { sendDonorDetailsEmail } = require("./EmailServices/sendDonorDetailsEmail");
 
 dotenv.config();
 
@@ -13,7 +18,10 @@ const PORT = process.env.PORT;
 
 const run = () =>{
     cron.schedule('* * * * * * *', () => {
-        console.log('running every second');
+        sendDetailsProsepctEmail();
+        sendEligibilityEmail();
+        sendBloodDonationReminder();
+        sendDonorDetailsEmail();
     });
 }
 
