@@ -2,10 +2,10 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
-import Donor from "./pages/Donor";
-import Prospect from "./pages/Prospect";
+import Donors from "./pages/Donors";
+import Prospects from "./pages/Prospects";
 import Menu from "./components/Menu";
-
+ 
 function App() {
   const Layout = () => {
     return (
@@ -42,12 +42,12 @@ function App() {
 
         {
           path: "/admin/donors",
-          element: <Donor />,
+          element: <Donors />,
         },
 
         {
-          path: "/admin/prospect",
-          element: <Prospect />,
+          path: "/admin/prospects",
+          element: <Prospects />,
         },
         
       ],

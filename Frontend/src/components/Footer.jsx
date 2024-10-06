@@ -22,7 +22,7 @@ const Footer = () => {
                             Admin
                         </li>
                     </Link>
-                    
+
                 </ul>
             </div>
 

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import { Element } from "react-scroll";
-
+ 
 function Home() {
   return (
     <div>
