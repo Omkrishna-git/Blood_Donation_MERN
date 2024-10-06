@@ -16,7 +16,7 @@ const Navbar = () => {
           to="hero"
           smooth={true}
           duration={1000}
-          className="mr-3 text-[18px] font-medium"
+          className="mr-5 hover:text-red-800 text-[18px] font-medium"
         >
           Home
         </Link>
@@ -26,7 +26,7 @@ const Navbar = () => {
           to="featured"
           smooth={true}
           duration={1000}
-          className="mr-3 text-[18px] font-medium"
+          className="mr-5 hover:text-red-800 text-[18px] font-medium"
         >
           About Us
         </Link>
@@ -36,7 +36,7 @@ const Navbar = () => {
           to="contact"
           smooth={true}
           duration={1000}
-          className="mr-3 text-[18px] font-medium"
+          className="mr-5 hover:text-red-800 text-[18px] font-medium"
         >
           Contact Us
         </Link>

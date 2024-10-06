@@ -15,11 +15,11 @@ function Hero() {
 
             <div className="flex items-center mt-[20px]">
 
-                <button className="bg-red-500 p-[10px] w-[200px] text-white cursor-pointer mr-9 ">
+                <button className="bg-red-500 hover:bg-red-600 p-[10px] w-[200px] text-white cursor-pointer mr-9 ">
                     Donate Now
                 </button>
 
-                <button className="bg-gray-500 p-[10px] w-[250px] text-white cursor-pointer mr-9 ">
+                <button className="bg-gray-500 hover:bg-gray-600 p-[10px] w-[250px] text-white cursor-pointer mr-9 ">
                     CALL : 9699673129
                 </button>
 
