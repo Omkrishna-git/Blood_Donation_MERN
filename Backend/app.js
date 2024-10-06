@@ -5,11 +5,11 @@ const authRoute = require("./routes/auth");
 const donorRoute= require("./routes/donor");
 const prospectRoute= require("./routes/prospect")
 module.exports=app;
-
-//Cors 
+ 
+//CORS
 app.use(cors());
 
-// Json
+// JSON
 app.use(express.json());
 
 // ROUTES

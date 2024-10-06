@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // REGISTER USER
- 
+
 const registerUser = async (req, res) => {
   const newUser = User({
     name: req.body.name,
