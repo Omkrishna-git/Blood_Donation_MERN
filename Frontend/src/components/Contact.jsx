@@ -6,7 +6,7 @@ const Contact = () => {
         <span className="text-[20px] my-[20px]">
           Do you want to donate blood? Fill in the information.
         </span>
-
+ 
         <label htmlFor="" className="text=[18px] mt-[10px] font-semibold">
           Name :
         </label>
