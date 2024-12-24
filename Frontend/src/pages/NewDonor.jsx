@@ -1,30 +1,30 @@
-// import { useState } from "react";
-// import { publicRequest } from "../requestMethods";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import { useSelector } from "react-redux";
+import { useState } from "react";
+import { publicRequest } from "../requestMethods";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 function NewDonor() {
-//   const [inputs, setInputs] = useState({});
-//   const user = useSelector((state) => state.user);
+  const [inputs, setInputs] = useState({});
+  const user = useSelector((state) => state.user);
 
-//   const handleChange = (e) => {
-//     setInputs((prev) => {
-//       return { ...prev, [e.target.name]: e.target.value };
-//     });
-//   };
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
-//   const handleDonors = async () => {
-//     try {
-//       await publicRequest.post("/donors", inputs, {
-//         headers: {token: `Bearer ${user.currentUser.accessToken}`}
-//       });
-//       toast.success("Donor has been successfully added to the database");
-//       setInputs({});
-//     } catch (error) {
-//       toast.warning(error.message);
-//     }
-//   };
+  const handleDonors = async () => {
+    try {
+      await publicRequest.post("/donors", inputs, {
+        headers: {token: `Bearer ${user.currentUser.accessToken}`}
+      });
+      toast.success("Donor has been successfully added to the database");
+      setInputs({});
+    } catch (error) {
+      toast.warning(error.message);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -36,18 +36,18 @@ function NewDonor() {
           <input
             type="text"
             placeholder="James Doe"
-            // name="name"
-            // value={inputs.name || ""}
-            // onChange={handleChange}
+            name="name"
+            value={inputs.name || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
           <label htmlFor="">Address</label>
           <input
             type="text"
             placeholder="123 DownTown, Sydney"
-            // name="address"
-            // value={inputs.address || ""}
-            // onChange={handleChange}
+            name="address"
+            value={inputs.address || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
@@ -55,9 +55,9 @@ function NewDonor() {
           <input
             type="Number"
             placeholder="(026) 272 839"
-            // name="tel"
-            // value={inputs.tel || ""}
-            // onChange={handleChange}
+            name="tel"
+            value={inputs.tel || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
@@ -66,9 +66,9 @@ function NewDonor() {
           </label>
           <select
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-            // name="bloodgroup"
-            // value={inputs.bloodgroup || ""}
-            // onChange={handleChange}
+            name="bloodgroup"
+            value={inputs.bloodgroup || ""}
+            onChange={handleChange}
           >
             <option value="">Select Blood Group</option>
             <option value="A+">A+</option>
@@ -85,9 +85,9 @@ function NewDonor() {
           <input
             type="text"
             placeholder="janedoe@example.com"
-            // name="email"
-            // value={inputs.email || ""}
-            // onChange={handleChange}
+            name="email"
+            value={inputs.email || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
         </div>
@@ -99,38 +99,38 @@ function NewDonor() {
           <input
             type="number"
             placeholder="50kg"
-            // name="weight"
-            // value={inputs.weight || ""}
-            // onChange={handleChange}
+            name="weight"
+            value={inputs.weight || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
           <label htmlFor="">Date</label>
           <input
             type="date"
             placeholder="2024/07/29"
-            // name="date"
-            // value={inputs.date || ""}
-            // onChange={handleChange}
+            name="date"
+            value={inputs.date || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Do you have any diseases?</label>
           <textarea
             type="Number"
-            // name="diseases"
-            // value={inputs.diseases || ""}
-            // onChange={handleChange}
+            name="diseases"
+            value={inputs.diseases || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
             placeholder="N/A"
           />
 
           <button
             className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]"
-            // onClick={handleDonors}
+            onClick={handleDonors}
           >
             Create
           </button>
-          {/* <ToastContainer /> */}
+          <ToastContainer />
         </div>
       </div>
     </div>

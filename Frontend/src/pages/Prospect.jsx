@@ -1,45 +1,45 @@
-// import { useEffect, useState } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { publicRequest } from "../requestMethods";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 function Prospect() {
-  // const [prospect, setProspect] = useState({});
-  // const location = useLocation();
-  // const prospectId = location.pathname.split("/")[3];
-  // const navigate = useNavigate();
+  const [prospect, setProspect] = useState({});
+  const location = useLocation();
+  const prospectId = location.pathname.split("/")[3];
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const getProspect = async () => {
-  //     try {
-  //       const res = await publicRequest.get(`/prospects/find/${prospectId}`);
-  //       setProspect(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  useEffect(() => {
+    const getProspect = async () => {
+      try {
+        const res = await publicRequest.get(`/prospects/find/${prospectId}`);
+        setProspect(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //   getProspect();
-  // }, []);
+    getProspect();
+  }, []);
 
-  // const approveProspect = async () => {
-  //   try {
-  //     await publicRequest.post("/donors", {
-  //       name: prospect.name,
-  //       address: prospect.address,
-  //       email: prospect.email,
-  //       tel: prospect.tel,
-  //       bloodgroup: prospect.bloodgroup,
-  //       diseases: prospect.diases,
-  //       date: prospect.date,
-  //       weight: prospect.weight,
-  //     });
+  const approveProspect = async () => {
+    try {
+      await publicRequest.post("/donors", {
+        name: prospect.name,
+        address: prospect.address,
+        email: prospect.email,
+        tel: prospect.tel,
+        bloodgroup: prospect.bloodgroup,
+        diseases: prospect.diases,
+        date: prospect.date,
+        weight: prospect.weight,
+      });
 
-  //     await publicRequest.delete(`/prospects/${prospectId}`);
-  //     navigate("/admin/donors");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      await publicRequest.delete(`/prospects/${prospectId}`);
+      navigate("/admin/donors");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -49,30 +49,30 @@ function Prospect() {
         <ul className="m-[30px]">
           <li className="mt-[14px]">
             <strong>Name :</strong> 
-            {/* {prospect.name} */}
+            {prospect.name}
           </li>
           <li className="mt-[14px]">
             <strong>Address : </strong>
-            {/* {prospect.address} */}
+            {prospect.address}
           </li>
           <li className="mt-[14px]">
             <strong>Tel: </strong>
-            {/* {prospect.tel} */}
+            {prospect.tel}
           </li>
 
           <li className="mt-[14px]">
             <strong>BloodType : </strong>
-            {/* {prospect.bloodgroup} */}
+            {prospect.bloodgroup}
           </li>
 
           <li className="mt-[14px]">
             <strong> Diseases :</strong>
-            {/* {prospect.diseases} */}
+            {prospect.diseases}
           </li>
 
           <li className="mt-[14px]">
             <strong>Weight :</strong>
-            {/* {prospect.weight}kg */}
+            {prospect.weight}kg
           </li>
         </ul>
 
@@ -82,7 +82,7 @@ function Prospect() {
 
         <button
           className="bg-red-500 text-white cursor-pointer p-[5px] w-[150px] m-[10px]"
-          // onClick={approveProspect}
+          onClick={approveProspect}
         >
           Approve
         </button>

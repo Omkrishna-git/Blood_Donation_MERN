@@ -1,42 +1,41 @@
-
-// import { useEffect, useState } from "react";
-// import { useLocation } from "react-router-dom";
-// import { publicRequest } from "../requestMethods";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 function Donor() {
-//   const [donor, setDonor] = useState({});
-//   const location = useLocation();
-//   const donorId = location.pathname.split("/")[3];
+  const [donor, setDonor] = useState({});
+  const location = useLocation();
+  const donorId = location.pathname.split("/")[3];
 
-//   const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({});
 
-//   const handleChange = (e) => {
-//     setInputs((prev) => {
-//       return { ...prev, [e.target.name]: e.target.value };
-//     });
-//   };
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
-//   useEffect(() => {
-//     const getDonor = async () => {
-//       try {
-//         const res = await publicRequest.get(`/donors/find/${donorId}`);
-//         setDonor(res.data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
+  useEffect(() => {
+    const getDonor = async () => {
+      try {
+        const res = await publicRequest.get(`/donors/find/${donorId}`);
+        setDonor(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-//     getDonor();
-//   }, []);
+    getDonor();
+  }, []);
 
-//   const handleUpdate = async () => {
-//     try {
-//       await publicRequest.put(`/donors/${donorId}`, inputs);
-//       window.location.reload();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  const handleUpdate = async () => {
+    try {
+      await publicRequest.put(`/donors/${donorId}`, inputs);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -47,37 +46,37 @@ function Donor() {
           <label htmlFor="">Name</label>
           <input
             type="text"
-            // placeholder={donor.name}
-            // name="name"
-            // value={inputs.name || ""}
-            // onChange={handleChange}
+            placeholder={donor.name}
+            name="name"
+            value={inputs.name || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
           <label htmlFor="">Address</label>
           <input
             type="text"
-            // placeholder={donor.address}
-            // name="address"
-            // value={inputs.address || ""}
-            // onChange={handleChange}
+            placeholder={donor.address}
+            name="address"
+            value={inputs.address || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Tel</label>
           <input
             type="text"
-            // placeholder={donor.tel}
-            // name="tel"
-            // value={inputs.tel || ""}
-            // onChange={handleChange}
+            placeholder={donor.tel}
+            name="tel"
+            value={inputs.tel || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Blood Group</label>
           <select
             name="bloodgroup"
-            // value={inputs.bloodgroup || ""}
-            // onChange={handleChange}
+            value={inputs.bloodgroup || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           >
             <option value="">Select Blood Group</option>
@@ -94,10 +93,10 @@ function Donor() {
           <label htmlFor="">Email</label>
           <input
             type="email"
-            // placeholder={donor.email}
-            // name="email"
-            // value={inputs.email || ""}
-            // onChange={handleChange}
+            placeholder={donor.email}
+            name="email"
+            value={inputs.email || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
         </div>
@@ -108,35 +107,35 @@ function Donor() {
           <label htmlFor="">Weight</label>
           <input
             type="number"
-            // name="weight"
-            // value={inputs.weight || ""}
-            // onChange={handleChange}
-            // placeholder={`${donor.weight} kg`}
+            name="weight"
+            value={inputs.weight || ""}
+            onChange={handleChange}
+            placeholder={`${donor.weight} kg`}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
           <label htmlFor="">Date</label>
           <input
             type="date"
-            // placeholder={donor.date}
-            // name="date"
-            // value={inputs.date || ""}
-            // onChange={handleChange}
+            placeholder={donor.date}
+            name="date"
+            value={inputs.date || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Do you have any diseases?</label>
           <textarea
             type="Number"
-            // name="diseases"
-            // value={inputs.diseases || ""}
-            // onChange={handleChange}
+            name="diseases"
+            value={inputs.diseases || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
-            // placeholder={donor.diseases}
+            placeholder={donor.diseases}
           />
 
           <button
             className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]"
-            // onClick={handleUpdate}
+            onClick={handleUpdate}
           >
             Update
           </button>
@@ -144,7 +143,6 @@ function Donor() {
       </div>
     </div>
   );
-};
+}
 
 export default Donor;
-

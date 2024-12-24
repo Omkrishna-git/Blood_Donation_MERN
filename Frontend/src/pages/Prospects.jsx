@@ -12,7 +12,7 @@ const Prospects = () => {
     { field: "address", headerName: "Address", width: 150 },
     { field: "bloodgroup", headerName: "BloodType", width: 130 },
     { field: "diseases", headerName: "Disease", width: 150 },
-
+ 
     {
       field: "edit",
       headerName: "Edit",
