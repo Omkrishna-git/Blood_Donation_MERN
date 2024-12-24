@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
-function Donor() {
-  const [donor, setDonor] = useState({});
-  const location = useLocation();
-  const donorId = location.pathname.split("/")[3];
-
+function NewDonor() {
   const [inputs, setInputs] = useState({});
+  const user = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -15,69 +14,61 @@ function Donor() {
     });
   };
 
-  useEffect(() => {
-    const getDonor = async () => {
-      try {
-        const res = await publicRequest.get(`/donors/find/${donorId}`);
-        setDonor(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getDonor();
-  }, []);
-
-  const handleUpdate = async () => {
+  const handleDonors = async () => {
     try {
-      await publicRequest.put(`/donors/${donorId}`, inputs);
-      window.location.reload();
+      await publicRequest.post("/donors", inputs, {
+        headers: {token: `Bearer ${user.currentUser.accessToken}`}
+      });
+      toast.success("Donor has been successfully added to the database");
+      setInputs({});
     } catch (error) {
-      console.log(error);
+      toast.warning(error.message);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="m-[20px] p-[20px] h-[80vh] w-[450px]">
-        <h2 className="font-semibold">Donor</h2>
+        <h2 className="font-semibold">New Donor</h2>
 
         <div className="flex flex-col my-[12px]">
           <label htmlFor="">Name</label>
           <input
             type="text"
-            placeholder={donor.name}
+            placeholder="James Doe"
             name="name"
             value={inputs.name || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
           <label htmlFor="">Address</label>
           <input
             type="text"
-            placeholder={donor.address}
+            placeholder="123 DownTown, Sydney"
             name="address"
             value={inputs.address || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Tel</label>
           <input
-            type="text"
-            placeholder={donor.tel}
+            type="Number"
+            placeholder="(026) 272 839"
             name="tel"
             value={inputs.tel || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
-          <label htmlFor="">Blood Group</label>
+          <label htmlFor="" className="text=[18px] mt-[10px] font-semibold">
+            Blood Group
+          </label>
           <select
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
             name="bloodgroup"
             value={inputs.bloodgroup || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
           >
             <option value="">Select Blood Group</option>
             <option value="A+">A+</option>
@@ -92,12 +83,12 @@ function Donor() {
 
           <label htmlFor="">Email</label>
           <input
-            type="email"
-            placeholder={donor.email}
+            type="text"
+            placeholder="janedoe@example.com"
             name="email"
             value={inputs.email || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
         </div>
       </div>
@@ -107,20 +98,20 @@ function Donor() {
           <label htmlFor="">Weight</label>
           <input
             type="number"
+            placeholder="50kg"
             name="weight"
             value={inputs.weight || ""}
             onChange={handleChange}
-            placeholder={`${donor.weight} kg`}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
           <label htmlFor="">Date</label>
           <input
             type="date"
-            placeholder={donor.date}
+            placeholder="2024/07/29"
             name="date"
             value={inputs.date || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
           />
 
           <label htmlFor="">Do you have any diseases?</label>
@@ -129,20 +120,22 @@ function Donor() {
             name="diseases"
             value={inputs.diseases || ""}
             onChange={handleChange}
-            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]"
-            placeholder={donor.diseases}
+            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
+            placeholder="N/A"
           />
 
           <button
             className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]"
-            onClick={handleUpdate}
+            onClick={handleDonors}
           >
-            Update
+            Create
           </button>
+          <ToastContainer />
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Donor;
+export default NewDonor;
+
