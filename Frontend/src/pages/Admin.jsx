@@ -11,7 +11,7 @@ import { publicRequest } from "../requestMethods";
 const Admin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+ 
   const [bloodGroupData, setBloodGroupData] = useState([]);
 
   useEffect(() => {

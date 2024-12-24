@@ -2,8 +2,8 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const dbConnection = require("./utils/db");
 dotenv.config();
-
-//PORT
+ 
+//PORT 
 const PORT = process.env.PORT
 
 // server
