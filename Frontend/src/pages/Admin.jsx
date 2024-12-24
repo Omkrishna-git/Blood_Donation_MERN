@@ -1,29 +1,28 @@
-import { Gauge } from "@mui/x-charts/Gauge";
-import { LineChart } from "@mui/x-charts/LineChart";
-import { FaUser } from "react-icons/fa";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { LineChart } from "@mui/x-charts/LineChart";
+import { Gauge } from "@mui/x-charts/Gauge";
+import { FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../redux/userRedux";
 import { useEffect, useState } from "react";
-// import { publicRequest } from "../requestMethods";
-// import {logout } from "../redux/userRedux"
-// import {useDispatch} from "react-redux";
-// import {useNavigate} from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 const Admin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [bloodGroupData, setBloodGroupData] = useState([]);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const getBloodGroupStats = async () => {
       try {
         const res = await publicRequest.get("/donors/stats");
-
         const transformedData = res.data.map((item, index) => ({
           id: index,
           value: item.count,
           label: `Blood Group ${item._id}`,
         }));
-
         setBloodGroupData(transformedData);
       } catch (error) {
         console.log(error);
@@ -34,7 +33,7 @@ const Admin = () => {
   }, []);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logOut());
     navigate("/login");
   };
 
@@ -101,22 +100,25 @@ const Admin = () => {
           </ul>
         </div>
 
-        {/* Pie Chart section */}
-        <PieChart
-          series={[
-            {
-              data: bloodGroupData,
-              innerRadius: 50,
-              outerRadius: 70,
-              paddingAngle: 5,
-              cornerRadius: 5,
-              startAngle: -90,
-              endAngle: 180,
-              cx: 100,
-              cy: 100,
-            },
-          ]}
-        />
+        {bloodGroupData.length === 0 ? (
+          <span>Loading data...</span>
+        ) : (
+          <PieChart
+            series={[
+              {
+                data: bloodGroupData,
+                innerRadius: 50,
+                outerRadius: 70,
+                paddingAngle: 7,
+                cornerRadius: 5,
+                startAngle: -90,
+                endAngle: 180,
+                cx: 150,
+                cy: 100,
+              },
+            ]}
+          />
+        )}
       </div>
     </div>
   );
