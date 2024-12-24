@@ -2,11 +2,9 @@ import { useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSelector } from "react-redux";
 
-function NewDonor() {
+const NewDonor = () => {
   const [inputs, setInputs] = useState({});
-  const user = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -14,119 +12,147 @@ function NewDonor() {
     });
   };
 
-  const handleDonors = async () => {
+  const handleAddDonors = async () => {
     try {
-      await publicRequest.post("/donors", inputs, {
-        headers: {token: `Bearer ${user.currentUser.accessToken}`}
-      });
-      toast.success("Donor has been successfully added to the database");
+      await publicRequest.post("/donors", inputs);
       setInputs({});
+      toast.success("Donor has been successfully saved to the database.");
     } catch (error) {
-      toast.warning(error.message);
+      toast.warning("Make sure you have fill all fields");
     }
   };
-
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="m-[20px] p-[20px] h-[80vh] w-[450px]">
-        <h2 className="font-semibold">New Donor</h2>
+    <div className="m-[30px] bg-[#fff] p-[20px]">
+      <h2 className="font-semibold">New Donor</h2>
+      <div className="flex">
+        <div className="m-[20px]">
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={inputs.name || ""}
+              placeholder="James Kruger"
+              onChange={handleChange}
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Address</label>
+            <input
+              type="text"
+              name="address"
+              placeholder="Michigan, USA"
+              value={inputs.address || ""}
+              onChange={handleChange}
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Tel</label>
+            <input
+              type="text"
+              name="tel"
+              value={inputs.tel || ""}
+              onChange={handleChange}
+              placeholder="+123 568 908"
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Blood Pressure</label>
+            <input
+              type="number"
+              name="bloodpressure"
+              placeholder="120"
+              value={inputs.bloodpressure || ""}
+              onChange={handleChange}
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Blood Group</label>
+            <select
+              id="bloodGroup"
+              name="bloodgroup"
+              value={inputs.bloodgroup || ""}
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+              onChange={handleChange}
+            >
+              <option value="">Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
 
-        <div className="flex flex-col my-[12px]">
-          <label htmlFor="">Name</label>
-          <input
-            type="text"
-            placeholder="James Doe"
-            name="name"
-            value={inputs.name || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
-          <label htmlFor="">Address</label>
-          <input
-            type="text"
-            placeholder="123 DownTown, Sydney"
-            name="address"
-            value={inputs.address || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
-
-          <label htmlFor="">Tel</label>
-          <input
-            type="Number"
-            placeholder="(026) 272 839"
-            name="tel"
-            value={inputs.tel || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
-
-          <label htmlFor="" className="text=[18px] mt-[10px] font-semibold">
-            Blood Group
-          </label>
-          <select
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-            name="bloodgroup"
-            value={inputs.bloodgroup || ""}
-            onChange={handleChange}
-          >
-            <option value="">Select Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
-
-          <label htmlFor="">Email</label>
-          <input
-            type="text"
-            placeholder="janedoe@example.com"
-            name="email"
-            value={inputs.email || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Email</label>
+            <input
+              type="text"
+              name="email"
+              value={inputs.email || ""}
+              onChange={handleChange}
+              placeholder="jameskruger@gmail.com"
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
         </div>
-      </div>
+        <div className="m-[20px]">
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Weight</label>
+            <input
+              type="Number"
+              name="weight"
+              value={inputs.weight || ""}
+              onChange={handleChange}
+              placeholder="60 kg"
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
 
-      <div className="m-[20px] p-[20px] h-[80vh] w-[450px]">
-        <div className="flex flex-col">
-          <label htmlFor="">Weight</label>
-          <input
-            type="number"
-            placeholder="50kg"
-            name="weight"
-            value={inputs.weight || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
-          <label htmlFor="">Date</label>
-          <input
-            type="date"
-            placeholder="2024/07/29"
-            name="date"
-            value={inputs.date || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-          />
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Date</label>
+            <input
+              type="date"
+              name="date"
+              value={inputs.date || ""}
+              placeholder="20/06/2024"
+              onChange={handleChange}
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Age</label>
+            <input
+              type="number"
+              name="age"
+              value={inputs.age || ""}
+              onChange={handleChange}
+              placeholder="30 years"
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
 
-          <label htmlFor="">Do you have any diseases?</label>
-          <textarea
-            type="Number"
-            name="diseases"
-            value={inputs.diseases || ""}
-            onChange={handleChange}
-            className="border-[#555] border-2 border-solid p-[10px] w-[300px]"
-            placeholder="N/A"
-          />
-
+          <div className="flex flex-col my-[20px]">
+            <label htmlFor="">Diseases</label>
+            <textarea
+              type="text"
+              name="diseases"
+              value={inputs.diseases || ""}
+              onChange={handleChange}
+              placeholder="Hypertension"
+              className="border-2 border-[#555] border-solid p-[10px] w-[300px]"
+            />
+          </div>
           <button
-            className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]"
-            onClick={handleDonors}
+            className="bg-[#1e1e1e] cursor-pointer text-white p-[10px] w-[300px]"
+            onClick={handleAddDonors}
           >
             Create
           </button>
@@ -138,4 +164,3 @@ function NewDonor() {
 };
 
 export default NewDonor;
-
