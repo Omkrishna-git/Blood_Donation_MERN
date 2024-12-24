@@ -11,7 +11,7 @@ import Donor from "./pages/Donor";
  
 function App() {
   const Layout = () => {
-    return (
+    return ( 
       <div className="flex">
         <div>
           <Menu />
